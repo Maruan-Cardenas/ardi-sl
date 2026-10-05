@@ -13,7 +13,16 @@ export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeLang, setActiveLang] = useState("ES");
+  const handleLanguageChange = (newLangCode: string) => {
+    if (newLangCode === lang) return;
+    const segments = pathname.split('/');
+    if (segments.length > 1 && (segments[1] === 'es' || segments[1] === 'fr')) {
+      segments[1] = newLangCode;
+      router.push(segments.join('/') || '/');
+    } else {
+      router.push(`/${newLangCode}${pathname}`);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +39,10 @@ export default function Header() {
     { name: dictionary.common.contact, href: "#contacto" },
   ];
 
-  const languages = ["ES", "EU", "EN", "FR"];
+  const languages = [
+    { code: 'es', label: 'ES' },
+    { code: 'fr', label: 'FR' }
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full transition-all duration-300">
@@ -66,18 +78,18 @@ export default function Header() {
 
             {/* Language Switcher */}
             <div className="flex items-center space-x-1 pl-2 border-l border-slate-800">
-              {languages.map((lang) => (
+              {languages.map((lng) => (
                 <button
-                  key={lang}
-                  onClick={() => setActiveLang(lang)}
+                  key={lng.code}
+                  onClick={() => handleLanguageChange(lng.code)}
                   className={`px-1.5 py-0.5 text-[10px] font-semibold rounded transition-colors ${
-                    activeLang === lang
+                    lang === lng.code
                       ? "bg-sky-600 text-white"
                       : "text-slate-400 hover:text-slate-200"
                   }`}
-                  aria-label={`Cambiar idioma a ${lang}`}
+                  aria-label={`Cambiar idioma a ${lng.label}`}
                 >
-                  {lang}
+                  {lng.label}
                 </button>
               ))}
             </div>

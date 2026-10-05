@@ -1,5 +1,5 @@
 "use client";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS, PRODUCT_CATEGORIES } from "@/data/products";
 import { useTranslation } from "@/components/I18nProvider";
 
 import { useState } from "react";
@@ -17,8 +17,12 @@ export default function ProductCatalog({
   const { dictionary } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<string>("TODOS");
 
-  const localizedProducts = PRODUCTS.map(p => ({...p, ...dictionary.products.find(dp => dp.id === p.id)}));
-  const filteredProducts = activeCategory === "Todos" 
+  const localizedProducts = PRODUCTS.map(p => {
+    const trans = dictionary.products ? dictionary.products.find((dp: any) => dp.id === p.id) : undefined;
+    return {...p, ...trans};
+  });
+  
+  const filteredProducts = activeCategory === "TODOS" 
     ? localizedProducts 
     : localizedProducts.filter(p => p.category === activeCategory);
 
@@ -38,37 +42,46 @@ export default function ProductCatalog({
         </div>
 
         {/* Categories / Filter Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-800">
-          <div className="flex items-center gap-2 text-slate-300">
-            <Filter className="w-5 h-5 text-sky-400" />
-            <span className="font-semibold text-sm tracking-wider uppercase">{dictionary.components.catalog.filterLbl}</span>
+        <div className="flex flex-col items-center mb-12 space-y-5">
+          <div className="flex items-center gap-2 text-slate-400">
+            <Filter className="w-4 h-4 text-sky-400" />
+            <span className="font-semibold text-xs tracking-[0.2em] uppercase">{dictionary.components.catalog.filterLbl}</span>
           </div>
           
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <button
-              onClick={() => setActiveCategory("TODOS")}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                activeCategory === "TODOS"
-                  ? "bg-sky-600 text-white shadow-md shadow-sky-600/30"
-                  : "bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800"
-              }`}
-            >
-              {dictionary.components.catalog.filterAll}
-            </button>
+          <div className="w-full relative group">
+            {/* Gradient masks for smooth scrolling edges on mobile */}
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none md:hidden" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none md:hidden" />
             
-            {Object.entries(dictionary.productCategories).map(([k,v])=>({id: k === "elaboracion" ? "Elaboración" : k === "prensadoDesuerado" ? "Prensado & Desuerado" : k === "lavadoSanidad" ? "Lavado & Sanidad" : k === "automatizacion" ? "Automatización" : "Calderería & Suministros", label: v})).map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                  activeCategory === cat.id
-                    ? "bg-sky-600 text-white shadow-md shadow-sky-600/30"
-                    : "bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            <div className="flex overflow-x-auto justify-start md:justify-center scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2 -mb-2">
+              <div className="flex items-center gap-1.5 px-4 md:px-0 mx-auto w-max bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800/80 backdrop-blur-md shadow-inner">
+                
+                <button
+                  onClick={() => setActiveCategory("TODOS")}
+                  className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${
+                    activeCategory === "TODOS"
+                      ? "text-white bg-sky-600 shadow-md shadow-sky-900/50"
+                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
+                  }`}
+                >
+                  {dictionary.components.catalog.filterAll}
+                </button>
+                
+                {PRODUCT_CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${
+                      activeCategory === cat.id
+                        ? "text-white bg-sky-600 shadow-md shadow-sky-900/50"
+                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -81,12 +94,10 @@ export default function ProductCatalog({
             >
               {/* Product Image Area */}
               <div className="relative aspect-[4/3] w-full bg-slate-800 overflow-hidden">
-                <Image
+                <img
                   src={product.image}
                   alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
                 
@@ -127,15 +138,8 @@ export default function ProductCatalog({
                     className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
                   >
                     <Eye className="w-4 h-4 text-sky-400" />
-                    <span>{dictionary.components.catalog.btnView}</span>
+                    <span>Más información</span>
                   </button>
-                  <a
-                    href="#contacto"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-sky-600 hover:bg-sky-500 shadow-md shadow-sky-600/20 transition-colors"
-                  >
-                    <span>{dictionary.components.catalog.btnQuote}</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </a>
                 </div>
               </div>
             </article>

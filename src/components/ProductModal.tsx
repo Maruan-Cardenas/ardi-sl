@@ -1,9 +1,8 @@
 "use client";
 import { useTranslation } from "@/components/I18nProvider";
 
-import { useEffect } from "react";
-import Image from "next/image";
-import { X, CheckCircle2, ChevronRight, Download, Info } from "lucide-react";
+import { useEffect, useState } from "react";
+import { X, CheckCircle2, ChevronRight, Download, Info, ChevronLeft } from "lucide-react";
 import { Product } from "@/data/products";
 
 interface ProductModalProps {
@@ -16,6 +15,13 @@ export default function ProductModal({
   onClose,
 }: ProductModalProps) {
   
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Reset image index when product changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [product]);
+
   // Close on Escape key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -38,6 +44,18 @@ export default function ProductModal({
   }, [product]);
 
   if (!product) return null;
+
+  const images = product.images && product.images.length > 0 ? product.images : [product.image];
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12">
@@ -68,16 +86,52 @@ export default function ProductModal({
         <div className="flex flex-col lg:flex-row h-full overflow-y-auto lg:overflow-hidden">
           
           {/* Left Column: Image Area */}
-          <div className="w-full lg:w-1/2 relative bg-slate-900 min-h-[300px] lg:min-h-full">
-            <Image
-              src={product.image}
-              alt={`Fotografía industrial de ${product.name}`}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+          <div className="w-full lg:w-1/2 relative bg-slate-900 min-h-[300px] lg:min-h-full group">
+            <img
+              src={images[currentImageIndex]}
+              alt={`Fotografía industrial de ${product.name} - ${currentImageIndex + 1}`}
+              className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-300"
             />
+            
+            {images.length > 1 && (
+              <>
+                {/* Navigation Arrows */}
+                <button
+                  onClick={handlePrevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-slate-950/50 text-white hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  aria-label="Imagen anterior"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={handleNextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-slate-950/50 text-white hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  aria-label="Siguiente imagen"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+
+                {/* Pagination Dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(idx);
+                      }}
+                      className={`w-2.5 h-2.5 rounded-full transition-all ${
+                        currentImageIndex === idx ? "bg-sky-400 scale-125" : "bg-white/50 hover:bg-white/80"
+                      }`}
+                      aria-label={`Ir a la imagen ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
             {/* Gradient Overlay for text readability if needed */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90 lg:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90 lg:hidden pointer-events-none" />
           </div>
 
           {/* Right Column: Content Area */}
@@ -154,15 +208,6 @@ export default function ProductModal({
                 >
                   <span>Pedir Presupuesto de este Equipo</span>
                   <ChevronRight className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => {
-                    alert("Ficha técnica PDF descargándose...");
-                  }}
-                  className="sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all"
-                >
-                  <Download className="w-4 h-4 text-sky-400" />
-                  <span className="sm:hidden lg:inline">Descargar PDF</span>
                 </button>
               </div>
             </div>
