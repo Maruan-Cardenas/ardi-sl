@@ -376,30 +376,6 @@ export const PRODUCTS: Product[] = [
     images: ["/images/CUBAS/CUBA-MANUAL-1.jpg","/images/CUBAS/CUBA-MANUAL-2.jpg","/images/CUBAS/CUBA-MANUAL-3.jpg"]
   },
   {
-    id: "PROYECTO-OSARTZAIN-p206837455",
-    name: "PROYECTO OSARTZAIN",
-    shortDescription: "Este equipo ha sido diseñado con los más altos estándares de calidad en acero inoxidable, ofreciendo un rendimiento excepcional y durabilidad para el sector lácteo y alimentario.",
-    fullDescription: "Nuestros equipos están fabricados a medida en acero inoxidable AISI 304/316L, garantizando la máxima higiene y eficiencia en sus procesos de producción. Diseñados para adaptarse a las necesidades específicas de cada cliente, combinan tecnología avanzada con una construcción robusta que asegura años de funcionamiento ininterrumpido y un mantenimiento sencillo.",
-    category: "Proyectos Especiales",
-    image: "https://www.ardi-sl.com/assets/img/default-product.png",
-    badge: "Tienda",
-    specs: [],
-    features: [],
-    options: []
-  },
-  {
-    id: "Sistema-de-lavado-automatico-p169794217",
-    name: "...",
-    shortDescription: "Este equipo ha sido diseñado con los más altos estándares de calidad en acero inoxidable, ofreciendo un rendimiento excepcional y durabilidad para el sector lácteo y alimentario.",
-    fullDescription: "Nuestros equipos están fabricados a medida en acero inoxidable AISI 304/316L, garantizando la máxima higiene y eficiencia en sus procesos de producción. Diseñados para adaptarse a las necesidades específicas de cada cliente, combinan tecnología avanzada con una construcción robusta que asegura años de funcionamiento ininterrumpido y un mantenimiento sencillo.",
-    category: "Proyectos Especiales",
-    image: "https://www.ardi-sl.com/assets/img/default-product.png",
-    badge: "Tienda",
-    specs: [],
-    features: [],
-    options: []
-  },
-  {
     id: "Deposito-interior-p169794216",
     name: "DEPÓSITO INTERIOR",
     shortDescription: "Depósito interior de 130 o 200 litros con doble bombas, doble agitador, y con una esfera de lavado. Se transporta cómodamente para efectuar las operaciones de lavado en la empresa.",
@@ -476,18 +452,6 @@ export const PRODUCTS: Product[] = [
     features: [],
     options: [],
     images: ["images/INSTALACION-QUESERIA/TUNEL-DE-LAVADO-1.jpg"]
-  },
-  {
-    id: "CESTILLOS-p169794198",
-    name: "CESTILLOS",
-    shortDescription: "Este equipo ha sido diseñado con los más altos estándares de calidad en acero inoxidable, ofreciendo un rendimiento excepcional y durabilidad para el sector lácteo y alimentario.",
-    fullDescription: "Nuestros equipos están fabricados a medida en acero inoxidable AISI 304/316L, garantizando la máxima higiene y eficiencia en sus procesos de producción. Diseñados para adaptarse a las necesidades específicas de cada cliente, combinan tecnología avanzada con una construcción robusta que asegura años de funcionamiento ininterrumpido y un mantenimiento sencillo.",
-    category: "Proyectos Especiales",
-    image: "https://www.ardi-sl.com/assets/img/default-product.png",
-    badge: "Tienda",
-    specs: [],
-    features: [],
-    options: []
   },
   {
     id: "PLATAFORMA-p169794185",
