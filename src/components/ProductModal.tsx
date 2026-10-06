@@ -61,14 +61,14 @@ export default function ProductModal({
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Modal Dialog */}
       <div 
-        className="relative flex flex-col w-full max-w-5xl max-h-full bg-slate-950 border border-slate-700 rounded-2xl shadow-2xl shadow-black/80 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className="relative flex flex-col w-full max-w-5xl max-h-full bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -77,7 +77,7 @@ export default function ProductModal({
         {/* Close Button Floating */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-900/60 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700/50 backdrop-blur-md transition-all"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 text-gray-600 hover:text-gray-900 hover:bg-gray-100 shadow-sm transition-all"
           aria-label="Cerrar modal"
         >
           <X className="w-5 h-5" />
@@ -86,7 +86,7 @@ export default function ProductModal({
         <div className="flex flex-col lg:flex-row h-full overflow-y-auto lg:overflow-hidden">
           
           {/* Left Column: Image Area */}
-          <div className="w-full lg:w-1/2 relative bg-slate-900 min-h-[300px] lg:min-h-full group">
+          <div className="w-full lg:w-1/2 relative bg-gray-100 min-h-[300px] lg:min-h-full group">
             <img
               src={images[currentImageIndex]}
               alt={`Fotografía industrial de ${product.name} - ${currentImageIndex + 1}`}
@@ -98,14 +98,14 @@ export default function ProductModal({
                 {/* Navigation Arrows */}
                 <button
                   onClick={handlePrevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-slate-950/50 text-white hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 text-blue-900 hover:bg-white shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
                   aria-label="Imagen anterior"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <button
                   onClick={handleNextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-slate-950/50 text-white hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 text-blue-900 hover:bg-white shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
                   aria-label="Siguiente imagen"
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -121,7 +121,7 @@ export default function ProductModal({
                         setCurrentImageIndex(idx);
                       }}
                       className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        currentImageIndex === idx ? "bg-sky-400 scale-125" : "bg-white/50 hover:bg-white/80"
+                        currentImageIndex === idx ? "bg-blue-600 scale-125" : "bg-white/70 hover:bg-white"
                       }`}
                       aria-label={`Ir a la imagen ${idx + 1}`}
                     />
@@ -131,40 +131,41 @@ export default function ProductModal({
             )}
 
             {/* Gradient Overlay for text readability if needed */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90 lg:hidden pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent opacity-90 lg:hidden pointer-events-none" />
           </div>
 
           {/* Right Column: Content Area */}
-          <div className="w-full lg:w-1/2 flex flex-col flex-1 max-h-full bg-slate-950 relative">
+          <div className="w-full lg:w-1/2 flex flex-col flex-1 max-h-full bg-white relative">
             
             {/* Scrollable Content Body */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
               
               {/* Header Info */}
               <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-950/50 border border-sky-800/50 text-xs font-semibold text-sky-400 mb-4">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-xs font-bold text-blue-900 uppercase tracking-wider mb-4">
                   <Info className="w-3.5 h-3.5" />
                   Especificaciones Técnicas
                 </div>
-                <h2 id="modal-title" className="text-3xl font-black text-white mb-3">
+                <h2 id="modal-title" className="text-3xl font-extrabold text-blue-950 mb-3 uppercase leading-tight">
                   {product.name}
                 </h2>
-                <p className="text-slate-400 leading-relaxed">
+                <div className="w-16 h-1 bg-blue-700 mb-5"></div>
+                <p className="text-gray-600 leading-relaxed text-sm md:text-base">
                   {product.fullDescription}
                 </p>
               </div>
 
               {/* Technical Features */}
               <div>
-                <h3 className="text-lg font-bold text-slate-200 mb-4 flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                  Características Principales
+                <h3 className="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2 uppercase tracking-wide">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                  Características
                 </h3>
-                <ul className="grid grid-cols-1 gap-3">
+                <ul className="grid grid-cols-1 gap-2">
                   {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-slate-900/50 border border-slate-800/60">
-                      <div className="w-1.5 h-1.5 rounded-full bg-sky-500 mt-2 shrink-0" />
-                      <span className="text-sm text-slate-300 leading-relaxed">
+                    <li key={idx} className="flex items-start gap-3 p-3 bg-gray-50 border border-gray-100">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2.5 shrink-0" />
+                      <span className="text-sm text-gray-700 leading-relaxed">
                         {feature}
                       </span>
                     </li>
@@ -175,16 +176,16 @@ export default function ProductModal({
               {/* Technical Specs (if any) */}
               {product.specs && product.specs.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-bold text-slate-200 mb-4">Datos Técnicos</h3>
-                  <div className="rounded-xl border border-slate-800 overflow-hidden">
+                  <h3 className="text-lg font-bold text-blue-900 mb-4 uppercase tracking-wide">Datos Técnicos</h3>
+                  <div className="border border-gray-200 overflow-hidden">
                     <table className="w-full text-sm text-left">
-                      <tbody className="divide-y divide-slate-800">
+                      <tbody className="divide-y divide-gray-200">
                         {product.specs.map((spec, idx) => (
-                          <tr key={idx} className="bg-slate-900/30 hover:bg-slate-900/60 transition-colors">
-                            <td className="px-4 py-3 font-semibold text-slate-300 w-1/3 bg-slate-900/50 border-r border-slate-800">
+                          <tr key={idx} className="bg-white hover:bg-gray-50 transition-colors">
+                            <td className="px-4 py-3 font-semibold text-gray-800 w-1/3 bg-gray-50 border-r border-gray-200">
                               {spec.label}
                             </td>
-                            <td className="px-4 py-3 text-slate-400">
+                            <td className="px-4 py-3 text-gray-600">
                               {spec.value}
                             </td>
                           </tr>
@@ -197,16 +198,16 @@ export default function ProductModal({
             </div>
 
             {/* Fixed Footer Action Area */}
-            <div className="p-6 bg-slate-900 border-t border-slate-800 shrink-0">
+            <div className="p-6 bg-gray-50 border-t border-gray-200 shrink-0">
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => {
                     onClose();
                     window.location.href = '#contacto';
                   }}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-sky-600 hover:bg-sky-500 shadow-lg shadow-sky-600/20 transition-all active:scale-[0.98]"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 font-bold text-white bg-blue-900 hover:bg-blue-800 transition-all uppercase tracking-wide"
                 >
-                  <span>Pedir Presupuesto de este Equipo</span>
+                  <span>Pedir Presupuesto</span>
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>

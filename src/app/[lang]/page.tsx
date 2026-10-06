@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100 selection:bg-sky-500 selection:text-white">
+    <div className="flex min-h-screen flex-col">
       {/* Top Fixed / Sticky Navigation */}
       <Header />
 
@@ -33,13 +33,13 @@ export default function Home() {
         {/* 1. Hero Section: Impact banner & value proposition */}
         <Hero />
 
-        {/* 2. Product Catalog: Modern Grid of core machinery lines */}
+        {/* 2. Quiénes Somos: History, 4 Pillars, Workshop and Methodology */}
+        <AboutSection />
+
+        {/* 3. Product Catalog: Modern Grid of core machinery lines */}
         <ProductCatalog
           onSelectProduct={handleSelectProduct}
         />
-
-        {/* 3. Quiénes Somos: History, 4 Pillars, Workshop and Methodology */}
-        <AboutSection />
 
         {/* 4. Contact Section: Direct info cards + interactive form */}
         <ContactSection onSuccessNotification={handleShowToast} />

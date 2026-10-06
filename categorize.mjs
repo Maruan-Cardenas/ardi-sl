@@ -19,7 +19,7 @@ function getCategory(name) {
   if (lower.includes('mesa') || lower.includes('plataforma') || lower.includes('carro') || lower.includes('cesto') || lower.includes('gu') || lower.includes('embolsadora')) {
     return "Equipamiento Adicional";
   }
-  return "Proyectos Especiales";
+  return "Instalación Quesería";
 }
 
 let newContent = content.replace(/category: "TIENDA"/g, (match, offset, str) => {
@@ -38,7 +38,7 @@ newContent = newContent.replace(/export const PRODUCT_CATEGORIES = \[[\s\S]*?\];
   { id: "Lavado & Sanidad", label: "Lavado & Sanidad" },
   { id: "Almacenamiento & Distribución", label: "Almacenamiento & Distribución" },
   { id: "Equipamiento Adicional", label: "Equipamiento Adicional" },
-  { id: "Proyectos Especiales", label: "Proyectos Especiales" }
+  { id: "Instalación Quesería", label: "Instalación Quesería" }
 ];`);
 
 fs.writeFileSync('src/data/products.ts', newContent);
