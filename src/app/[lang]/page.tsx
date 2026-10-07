@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import ProductCatalog from "@/components/ProductCatalog";
 import ProductModal from "@/components/ProductModal";
 import AboutSection from "@/components/AboutSection";
+import MaintenanceSection from "@/components/MaintenanceSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import NotificationToast from "@/components/NotificationToast";
@@ -41,7 +42,10 @@ export default function Home() {
           onSelectProduct={handleSelectProduct}
         />
 
-        {/* 4. Contact Section: Direct info cards + interactive form */}
+        {/* 4. Maintenance / Technical Service */}
+        <MaintenanceSection />
+
+        {/* 5. Contact Section: Direct info cards + interactive form */}
         <ContactSection onSuccessNotification={handleShowToast} />
       </main>
 

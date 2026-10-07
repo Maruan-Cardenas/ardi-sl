@@ -36,6 +36,7 @@ export default function Header() {
     { name: dictionary.common.home, href: "#inicio" },
     { name: dictionary.common.aboutUs, href: "#quienes-somos" },
     { name: dictionary.common.productCatalog, href: "#productos" },
+    { name: lang === 'es' ? 'Mantenimiento' : 'Entretien', href: "#mantenimiento" },
     { name: dictionary.common.contact, href: "#contacto" },
   ];
 
