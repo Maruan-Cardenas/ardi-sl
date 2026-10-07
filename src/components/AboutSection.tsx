@@ -77,7 +77,7 @@ export default function AboutSection() {
           <div className="lg:col-span-6 relative">
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-100 border border-gray-200 shadow-xl shadow-gray-200/50">
               <Image
-                src="/images/taller-soldadura.jpg"
+                src="/images/about.jpg"
                 alt="Taller de calderería de {dictionary.components.about.desc1Highlight2} en Oiartzun"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -97,70 +97,6 @@ export default function AboutSection() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* 4 Pillars of Excellence */}
-        <div className="mb-20">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-blue-950 tracking-tight uppercase">
-              {dictionary.components.about.pillarsTitle}
-            </h3>
-            <div className="w-16 h-1 bg-blue-700 mx-auto mt-4 mb-4"></div>
-            <p className="text-sm text-gray-600 font-medium">
-              {dictionary.components.about.pillarsDesc}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {COMPANY.pillars.map((p, i) => ({ ...p, ...dictionary.company.pillars[i] })).map((pillar) => (
-              <div
-                key={pillar.id}
-                className="p-6 rounded-2xl bg-gray-50 hover:bg-white border border-gray-200 hover:border-blue-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-blue-200 transition-all shadow-sm">
-                    {iconMap[pillar.icon]}
-                  </div>
-                  <h4 className="text-lg font-bold text-blue-950 mb-3 group-hover:text-blue-700 transition-colors uppercase tracking-wide">
-                    {pillar.title}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                    {pillar.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Methodology / Process Steps */}
-        <div id="metodologia" className="pt-12 border-t border-gray-200">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-4">
-              <span>{dictionary.components.about.methodBadge}</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-blue-950 tracking-tight uppercase">
-              {dictionary.components.about.methodTitle}
-            </h3>
-            <p className="mt-4 text-sm text-gray-600 font-medium">
-              {dictionary.components.about.methodDesc}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {COMPANY.processSteps.map((p, i) => ({ ...p, ...dictionary.company.processSteps[i] })).map((step) => (
-              <div
-                key={step.step}
-                className="relative p-6 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="text-5xl font-black text-gray-100 mb-2">
-                  {step.step}
-                </div>
-                <h4 className="text-base font-bold text-blue-950 mb-2 uppercase tracking-wide">{step.title}</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">{step.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>

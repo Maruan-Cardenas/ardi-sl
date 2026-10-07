@@ -50,12 +50,8 @@ export default function ProductCatalog({
           </div>
           
           <div className="w-full relative group">
-            {/* Gradient masks for smooth scrolling edges on mobile */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none md:hidden" />
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none md:hidden" />
-            
-            <div className="flex overflow-x-auto justify-start md:justify-center scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-2 -mb-2">
-              <div className="flex items-center gap-2 px-4 md:px-0 mx-auto w-max bg-white p-2 rounded-xl border border-gray-200 shadow-sm">
+            <div className="flex justify-center">
+              <div className="flex flex-wrap items-center justify-center gap-2 px-2 md:px-0 mx-auto bg-white p-2 rounded-xl border border-gray-200 shadow-sm">
                 
                 <button
                   onClick={() => setActiveCategory("TODOS")}
@@ -72,7 +68,7 @@ export default function ProductCatalog({
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`relative px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-blue-500 uppercase tracking-wide ${
+                    className={`relative px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 uppercase tracking-wide ${
                       activeCategory === cat.id
                         ? "text-white bg-blue-900 shadow-md"
                         : "text-gray-600 hover:text-blue-900 hover:bg-gray-100"

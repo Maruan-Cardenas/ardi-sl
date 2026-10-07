@@ -34,8 +34,8 @@ export default function Header() {
 
   const navLinks = [
     { name: dictionary.common.home, href: "#inicio" },
-    { name: dictionary.common.productCatalog, href: "#productos" },
     { name: dictionary.common.aboutUs, href: "#quienes-somos" },
+    { name: dictionary.common.productCatalog, href: "#productos" },
     { name: dictionary.common.contact, href: "#contacto" },
   ];
 

@@ -14,7 +14,6 @@ import {
   Copy,
   ExternalLink,
   MessageSquare,
-  ShieldCheck,
 } from "lucide-react";
 
 interface ContactSectionProps {
